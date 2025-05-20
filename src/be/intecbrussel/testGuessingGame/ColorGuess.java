@@ -1,4 +1,4 @@
-package be.intecbrussel.guessingGame;
+package be.intecbrussel.testGuessingGame;
 
 import java.util.Random;
 

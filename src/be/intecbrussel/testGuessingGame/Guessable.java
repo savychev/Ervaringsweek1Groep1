@@ -1,4 +1,4 @@
-package be.intecbrussel.guessingGame;
+package be.intecbrussel.testGuessingGame;
 
 // Interface voor alle gokuitdagingen
 public interface Guessable {

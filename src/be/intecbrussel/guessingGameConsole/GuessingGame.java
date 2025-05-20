@@ -1,4 +1,4 @@
-package be.intecbrussel.guessingGame;
+package be.intecbrussel.guessingGameConsole;
 
 import java.util.*;
 
