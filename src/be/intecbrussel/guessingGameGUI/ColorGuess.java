@@ -2,18 +2,17 @@ package be.intecbrussel.guessingGameGUI;
 
 import java.util.List;
 
-public class ColorGuess implements Guessable {
+public class ColorGuess extends AbstractGuessingGame {
 
     private static final List<String> COLORS = List.of(
             "red", "blue", "green", "yellow", "orange", "purple"
     );
 
-    private final String secret;
-    private boolean guessed;
+    private String secret;  // De geheime kleur die geraden moet worden
+    private boolean guessed;      // Houdt bij of de speler de juiste kleur al heeft geraden
 
-    public ColorGuess() {
-        secret = COLORS.get(SharedRandom.RANDOM.nextInt(COLORS.size()));
-        guessed = false;
+    public ColorGuess() { // Constructor — kiest willekeurig een kleur uit de lijst
+        reset();
     }
 
     @Override
@@ -22,24 +21,26 @@ public class ColorGuess implements Guessable {
     }
 
     @Override
-    public String guess(String input) {
+    public String guess(String input) { // Verwerkt de gok van de speler
         input = input.toLowerCase();
+
         if (guessed) {
             return "Already guessed!";
         }
-        int cmp = input.compareTo(secret);
-        if (cmp == 0) {
+
+        int cmp = input.compareTo(secret); // Vergelijkt alfabetisch de invoer met het geheim
+        if (cmp == 0) { // Als het exact overeenkomt
             guessed = true;
             return "Correct! The color was " + secret + ".";
         }
-        return (cmp < 0)
-//                ? "The color comes alphabetically after "
+        return (cmp < 0) // Geef hint of het woord eerder of later komt in het alfabet
                 ? "The color comes alphabetically after " + input + "."
                 : "The color comes alphabetically before " + input + ".";
     }
 
     @Override
-    public boolean isGuessed() {
-        return guessed;
+    public void reset() {
+        super.reset();
+        secret = COLORS.get(SharedRandom.RANDOM.nextInt(COLORS.size()));
     }
 }

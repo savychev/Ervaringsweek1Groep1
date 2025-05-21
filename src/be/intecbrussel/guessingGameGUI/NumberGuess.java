@@ -1,18 +1,18 @@
 package be.intecbrussel.guessingGameGUI;
 
-public class NumberGuess implements Guessable {
+public class NumberGuess extends AbstractGuessingGame {
 
-    private final int secret;
-    private boolean guessed;
+    private int secret;
+    private static final int MIN = 1;
+    private static final int MAX = 100;
 
     public NumberGuess() {
-        secret = SharedRandom.RANDOM.nextInt(10) + 1; // 1–10
-        guessed = false;
+        reset();
     }
 
     @Override
     public String getPrompt() {
-        return "Guess the number (1‑10):";
+        return "Guess the number ("+MIN+"‑"+MAX+"):";
     }
 
     @Override
@@ -34,7 +34,10 @@ public class NumberGuess implements Guessable {
     }
 
     @Override
-    public boolean isGuessed() {
-        return guessed;
+    public void reset() {
+        super.reset();
+        secret = SharedRandom.RANDOM.nextInt(10) + 1; // 1–10
     }
+
+
 }

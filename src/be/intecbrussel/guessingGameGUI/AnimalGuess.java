@@ -2,14 +2,13 @@ package be.intecbrussel.guessingGameGUI;
 
 import java.util.List;
 
-public class AnimalGuess implements Guessable {
+public class AnimalGuess extends AbstractGuessingGame {
 
     private static final List<String> ANIMALS = List.of(
             "dog", "cat", "elephant", "lion", "tiger"
     );
 
     private final String secret;
-    private boolean guessed;
 
     public AnimalGuess() {
         secret = ANIMALS.get(SharedRandom.RANDOM.nextInt(ANIMALS.size()));
@@ -32,10 +31,5 @@ public class AnimalGuess implements Guessable {
             return "Correct! The animal was " + secret + ".";
         }
         return "Incorrect, try again.";
-    }
-
-    @Override
-    public boolean isGuessed() {
-        return guessed;
     }
 }

@@ -1,24 +1,10 @@
 package be.intecbrussel.guessingGameGUI;
 
-/**
- * Contract for a single guessing challenge.
- */
-public interface Guessable {
-    /**
-     * Prompt shown to the player before each attempt.
-     */
-    String getPrompt();
+public interface Guessable {  // Definieert een interface voor een raadspelcomponent
+    String getPrompt();  // Geeft de opdracht of vraag weer die aan de speler wordt getoond
 
-    /**
-     * Processes user's guess and returns feedback message.
-     *
-     * @param input Raw user input (trimmed, lowered)
-     * @return feedback for the player
-     */
-    String guess(String input);
+    String guess(String input);  // Verwerkt de gok van de gebruiker en retourneert feedback
 
-    /**
-     * @return true when the challenge is solved
-     */
-    boolean isGuessed();
+    boolean isGuessed();  // Geeft aan of het juiste antwoord al geraden is
 }
+

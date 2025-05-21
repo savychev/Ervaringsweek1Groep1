@@ -9,10 +9,11 @@ import java.awt.event.ActionListener;
  */
 public class GuessingGameGUI {
 
-    private final GuessingGame game = new GuessingGame();
-    private final JTextArea outputArea = new JTextArea();
-    private final JTextField inputField = new JTextField();
-    private final JLabel promptLabel = new JLabel();
+    private final GuessingGame game = new GuessingGame(); // Het spelobject dat de spelregels en voortgang beheert
+    private final JTextArea outputArea = new JTextArea(); // Tekstvak waarin feedback en meldingen worden weergegeven
+    private final JTextField inputField = new JTextField(); // Invoerveld waar de gebruiker zijn gok typt
+    private final JLabel promptLabel = new JLabel(); // Label dat een opdracht of vraag toont aan de speler
+
 
     public GuessingGameGUI() {
         JFrame frame = new JFrame("Guessing Game"); // Maakt een nieuw venster met de titel "Guessing Game"
@@ -41,28 +42,33 @@ public class GuessingGameGUI {
 
 
         // Update initial prompt
-        promptLabel.setText(game.getCurrentPrompt());
+        promptLabel.setText(game.getCurrentPrompt()); // Vult het label bovenaan met de huidige opdracht uit het spel
 
+        // Definieert wat er gebeurt wanneer de gebruiker op Enter drukt of op de knop klikt
         ActionListener sendAction = e -> {
-            String text = inputField.getText().trim();
-            if (text.isEmpty()) return;
-            outputArea.append("> " + text + "\n");
-            String feedback = game.processInput(text);
-            outputArea.append(feedback + "\n\n");
-            inputField.setText("");
+            String text = inputField.getText().trim();  // Haalt de invoer van de gebruiker op en verwijdert witruimte aan begin/einde
+            if (text.isEmpty()) return;  // Als het invoerveld leeg is, doe dan niets
+            outputArea.append("> " + text + "\n");  // Toont wat de gebruiker heeft ingevoerd in het uitvoerveld (zoals in een console)
 
-            if (game.isFinished()) {
-                promptLabel.setText("Game finished!");
-                inputField.setEnabled(false);
+            String feedback = game.processInput(text);  // Verwerkt de invoer via het spelobject en haalt feedback op
+            outputArea.append(feedback + "\n\n");  // Voegt de feedback van het spel toe aan het uitvoerveld, met extra witruimte
+
+            inputField.setText("");  // Leegt het invoerveld voor de volgende invoer
+
+            if (game.isFinished()) { // Controleert of het spel afgelopen is
+                promptLabel.setText("Game finished!");  // Verandert het label naar een eindboodschap
+                inputField.setEnabled(false);  // Deactiveert het invoerveld zodat de gebruiker niets meer kan invoeren
             } else {
-                promptLabel.setText(game.getCurrentPrompt());
+                promptLabel.setText(game.getCurrentPrompt());  // Vraagt de volgende opdracht op uit het spel en toont deze
             }
         };
 
-        submitButton.addActionListener(sendAction);
-        inputField.addActionListener(sendAction);
 
-        frame.setLocationRelativeTo(null); // center on screen
-        frame.setVisible(true);
+        submitButton.addActionListener(sendAction);  // Koppelt de actie aan de knop: wanneer je klikt, wordt sendAction uitgevoerd
+        inputField.addActionListener(sendAction);    // Koppelt dezelfde actie aan Enter in het invoerveld
+
+        frame.setLocationRelativeTo(null);           // Centreert het venster in het midden van het scherm
+        frame.setVisible(true);                      // Maakt het venster zichtbaar voor de gebruiker
+
     }
 }
