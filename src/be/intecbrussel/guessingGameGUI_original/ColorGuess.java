@@ -1,4 +1,4 @@
-package be.intecbrussel.guessingGameGUI;
+package be.intecbrussel.guessingGameGUI_original;
 
 import java.util.List;
 
@@ -9,7 +9,6 @@ public class ColorGuess extends AbstractGuessingGame {
     );
 
     private String secret;  // De geheime kleur die geraden moet worden
-    private boolean guessed;      // Houdt bij of de speler de juiste kleur al heeft geraden
 
     public ColorGuess() { // Constructor — kiest willekeurig een kleur uit de lijst
         reset();

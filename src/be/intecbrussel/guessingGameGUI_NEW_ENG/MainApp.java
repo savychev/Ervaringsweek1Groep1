@@ -1,4 +1,4 @@
-package be.intecbrussel.guessingGameGUI;
+package be.intecbrussel.guessingGameGUI_NEW_ENG;
 import javax.swing.*;
 
 public class MainApp {

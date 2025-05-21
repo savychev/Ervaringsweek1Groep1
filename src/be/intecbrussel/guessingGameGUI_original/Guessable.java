@@ -1,4 +1,4 @@
-package be.intecbrussel.guessingGameGUI;
+package be.intecbrussel.guessingGameGUI_original;
 
 public interface Guessable {  // Definieert een interface voor een raadspelcomponent
     String getPrompt();  // Geeft de opdracht of vraag weer die aan de speler wordt getoond

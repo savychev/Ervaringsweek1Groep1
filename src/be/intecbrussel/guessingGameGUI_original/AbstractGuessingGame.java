@@ -1,4 +1,4 @@
-package be.intecbrussel.guessingGameGUI;
+package be.intecbrussel.guessingGameGUI_original;
 
 public abstract class AbstractGuessingGame implements Guessable {
     protected boolean guessed = false; // Houdt bij of de speler de juiste kleur al heeft geraden

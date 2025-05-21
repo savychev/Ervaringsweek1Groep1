@@ -1,4 +1,4 @@
-package be.intecbrussel.guessingGameGUI;
+package be.intecbrussel.guessingGameGUI_original;
 
 import java.util.List;
 
@@ -8,11 +8,10 @@ public class AnimalGuess extends AbstractGuessingGame {
             "dog", "cat", "elephant", "lion", "tiger"
     );
 
-    private final String secret;
+    private String secret;
 
     public AnimalGuess() {
-        secret = ANIMALS.get(SharedRandom.RANDOM.nextInt(ANIMALS.size()));
-        guessed = false;
+        reset();
     }
 
     @Override
@@ -31,5 +30,12 @@ public class AnimalGuess extends AbstractGuessingGame {
             return "Correct! The animal was " + secret + ".";
         }
         return "Incorrect, try again.";
+    }
+
+
+    @Override
+    public void reset() {
+        super.reset();
+        secret = ANIMALS.get(SharedRandom.RANDOM.nextInt(ANIMALS.size()));
     }
 }
