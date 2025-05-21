@@ -1,43 +1,34 @@
 package be.intecbrussel.guessingGameGUI_original;
 
-public class NumberGuess extends AbstractGuessingGame {
+public class NumberGuess extends AbstractGuessingGame<Integer> {
+    private static final int MAX_NUMBER = 100;
 
-    private int secret;
-    private static final int MIN = 1;
-    private static final int MAX = 100;
-
-    public NumberGuess() {
-        reset();
+    @Override
+    protected Integer getNewSecret() {
+        return SharedRandom.RANDOM.nextInt(MAX_NUMBER) + 1;
     }
 
     @Override
     public String getPrompt() {
-        return "Guess the number ("+MIN+"‑"+MAX+"):";
+        return "Guess the number (1-" + MAX_NUMBER + "):";
     }
 
     @Override
     public String guess(String input) {
-        if (guessed) {
-            return "Already guessed!";
-        }
-        int value;
+        if (guessed) return "Already guessed!";
+        int guessNumber;
         try {
-            value = Integer.parseInt(input.trim());
-        } catch (NumberFormatException ex) {
-            return "Please enter a valid integer.";
+            guessNumber = Integer.parseInt(input.trim());
+        } catch (NumberFormatException e) {
+            return "Not a number!";
         }
-        if (value == secret) {
+        if (guessNumber == secret) {
             guessed = true;
             return "Correct! The number was " + secret + ".";
+        } else if (guessNumber < secret) {
+            return "The number is higher!";
+        } else {
+            return "The number is lower!";
         }
-        return (value < secret) ? "Too low." : "Too high.";
     }
-
-    @Override
-    public void reset() {
-        super.reset();
-        secret = SharedRandom.RANDOM.nextInt(10) + 1; // 1–10
-    }
-
-
 }
