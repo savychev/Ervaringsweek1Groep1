@@ -42,4 +42,9 @@ public class ColorGuess extends AbstractGuessingGame {
         super.reset();
         secret = COLORS.get(SharedRandom.RANDOM.nextInt(COLORS.size()));
     }
+
+    @Override
+    protected Object getNewSecret() {
+        return null;
+    }
 }

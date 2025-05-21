@@ -38,4 +38,9 @@ public class AnimalGuess extends AbstractGuessingGame {
         super.reset();
         secret = ANIMALS.get(SharedRandom.RANDOM.nextInt(ANIMALS.size()));
     }
+
+    @Override
+    protected Object getNewSecret() {
+        return null;
+    }
 }
