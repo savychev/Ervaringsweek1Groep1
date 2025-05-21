@@ -1,16 +1,23 @@
 package be.intecbrussel.guessingGameGUI;
 
-public abstract class AbstractGuessingGame implements Guessable {
-    protected boolean guessed = false; // Houdt bij of de speler de juiste kleur al heeft geraden
+public abstract class AbstractGuessingGame<T> implements Guessable {
+    protected T secret;
+    protected boolean guessed;
+
+    public AbstractGuessingGame() {
+        reset();
+    }
 
     @Override
     public boolean isGuessed() {
         return guessed;
     }
 
+    @Override
     public void reset() {
-        guessed = false;
+        this.secret = getNewSecret();
+        this.guessed = false;
     }
 
-    // Hier kun je gedeelde methodes plaatsen die voor alle spellen gelden
+    protected abstract T getNewSecret();
 }

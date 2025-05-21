@@ -2,17 +2,14 @@ package be.intecbrussel.guessingGameGUI;
 
 import java.util.List;
 
-public class AnimalGuess extends AbstractGuessingGame {
-
+public class AnimalGuess extends AbstractGuessingGame<String> {
     private static final List<String> ANIMALS = List.of(
-            "dog", "cat", "elephant", "lion", "tiger"
+        "cat", "dog", "lion", "tiger", "elephant", "wolf"
     );
 
-    private final String secret;
-
-    public AnimalGuess() {
-        secret = ANIMALS.get(SharedRandom.RANDOM.nextInt(ANIMALS.size()));
-        guessed = false;
+    @Override
+    protected String getNewSecret() {
+        return ANIMALS.get(SharedRandom.RANDOM.nextInt(ANIMALS.size()));
     }
 
     @Override
@@ -23,13 +20,14 @@ public class AnimalGuess extends AbstractGuessingGame {
     @Override
     public String guess(String input) {
         input = input.toLowerCase();
-        if (guessed) {
-            return "Already guessed!";
-        }
-        if (input.equals(secret)) {
+        if (guessed) return "Already guessed!";
+        int cmp = input.compareTo(secret);
+        if (cmp == 0) {
             guessed = true;
             return "Correct! The animal was " + secret + ".";
         }
-        return "Incorrect, try again.";
+        return (cmp < 0)
+            ? "The animal comes alphabetically after " + input + "."
+            : "The animal comes alphabetically before " + input + ".";
     }
 }
